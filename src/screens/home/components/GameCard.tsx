@@ -52,6 +52,10 @@ export default function GameCard({
             {game.rating?.toFixed(1) ?? "—"}
           </Text>
         </View>
+
+        {/* <View className="absolute right-2 bottom-2">
+          <SaveButton game={game} size={15} />
+        </View> */}
       </View>
 
       <Text

@@ -1,7 +1,6 @@
-import { Image } from "expo-image";
 import { router } from "expo-router";
 import { Star } from "lucide-react-native";
-import { Pressable, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 
 import SaveButton from "@/components/SaveButton";
 import { Game } from "@/types/game";
@@ -18,8 +17,8 @@ export default function SavedGameCard({ game }: SavedGameCardProps) {
     >
       <View className="relative">
         <Image
-          source={{ uri: game.coverUrl }}
-          contentFit="cover"
+          source={{ uri: game.coverUrl || game.bannerUrl }}
+          resizeMode="cover"
           className="aspect-[3/4] w-full rounded-xl"
         />
         <View className="absolute right-2 top-2 flex-row items-center rounded-full bg-[#1D201F]/95 px-2.5 py-1.5">
@@ -29,7 +28,7 @@ export default function SavedGameCard({ game }: SavedGameCardProps) {
           </Text>
         </View>
         <View className="absolute bottom-2 right-2">
-          <SaveButton gameId={game.id} size={15} />
+          <SaveButton game={game} size={15} />
         </View>
       </View>
       <Text numberOfLines={2} className="mt-3 text-[14px] leading-[18px] text-white">

@@ -12,3 +12,4 @@ export function useIgdbGames(query: string) {
     staleTime: 5 * 60_000,
   });
 }
+

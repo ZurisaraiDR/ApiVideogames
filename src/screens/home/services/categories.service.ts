@@ -1,6 +1,22 @@
 import { api } from '@/api/api.config';
 import type { Game, Platform } from '@/types/game';
 
+export type Genre = {
+    id: number;
+    name: string;
+};
+
+export const getGenres = async (signal?: AbortSignal): Promise<Genre[]> => {
+    const query = `
+        fields id, name;
+        sort name asc;
+        limit 100;
+    `;
+
+    const response = await api.post<Genre[]>('/genres', query, { signal });
+    return response.data;
+};
+
 interface IGDBCategoryGame {
     id: number;
     name: string;
@@ -13,6 +29,9 @@ interface IGDBCategoryGame {
         id: number;
         name: string;
         abbreviation?: string;
+    }[];
+    game_modes?: {
+        id: number;
     }[];
     involved_companies?: {
         company: {
@@ -48,6 +67,32 @@ export const getGamesByGenre = async (genreId: number, signal?: AbortSignal): Pr
         fields name, rating, cover.url, platforms.name, platforms.abbreviation,
         involved_companies.company.name;
         where rating_count != null & rating_count > 50 & genres = ${genreId};
+        sort rating desc;
+        limit 15;
+    `;
+
+    const response = await api.post<IGDBCategoryGame[]>('/games', query, { signal });
+    return response.data.map(adaptCategoryGame);
+};
+
+export const getGamesByPlatform = async (platformId: number, signal?: AbortSignal): Promise<Game[]> => {
+    const query = `
+        fields name, rating, cover.url, platforms.name, platforms.abbreviation,
+        involved_companies.company.name;
+        where rating_count != null & rating_count > 50 & platforms = ${platformId};
+        sort rating desc;
+        limit 15;
+    `;
+
+    const response = await api.post<IGDBCategoryGame[]>('/games', query, { signal });
+    return response.data.map(adaptCategoryGame);
+};
+
+export const getGamesByMode = async (modeId: number, signal?: AbortSignal): Promise<Game[]> => {
+    const query = `
+        fields name, rating, cover.url, platforms.name, platforms.abbreviation,
+        involved_companies.company.name;
+        where rating_count != null & rating_count > 50 & game_modes = ${modeId};
         sort rating desc;
         limit 15;
     `;

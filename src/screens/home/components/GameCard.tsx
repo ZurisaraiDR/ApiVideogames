@@ -59,7 +59,7 @@ export default function GameCard({
         </View>
 
         {/* <View className="absolute right-2 bottom-2">
-          <SaveButton gameId={game.id} size={15} />
+          <SaveButton game={game} size={15} />
         </View> */}
       </View>
 

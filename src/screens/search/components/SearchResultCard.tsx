@@ -24,7 +24,7 @@ export default function SearchResultCard({ game }: SearchResultCardProps) {
           className="h-[150px] w-[112px] rounded-xl"
         />
         <View className="absolute right-1 top-1">
-          <SaveButton gameId={game.id} size={15} />
+          <SaveButton game={game} size={15} />
         </View>
       </View>
       <View className="ml-5 flex-1 justify-center">

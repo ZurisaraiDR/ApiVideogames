@@ -1,29 +1,52 @@
 import { Game } from "@/types/game";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type SavedListener = () => void;
 
 const savedStorageKey = "my-expo-app.saved-games";
+const savedGames = new Map<number, Game>();
+const listeners = new Set<SavedListener>();
+let savedGamesLoaded = false;
+let loadPromise: Promise<void> | null = null;
 
-function readSavedIds() {
-  if (typeof localStorage === "undefined") {
-    return [];
-  }
-
-  try {
-    const storedIds = localStorage.getItem(savedStorageKey);
-    return storedIds ? (JSON.parse(storedIds) as number[]) : [];
-  } catch {
-    return [];
-  }
+async function persistSavedIds() {
+  await AsyncStorage.setItem(
+    savedStorageKey,
+    JSON.stringify([...savedGames.values()]),
+  );
 }
 
-const savedIds = new Set<number>(readSavedIds());
-const listeners = new Set<SavedListener>();
-
-function persistSavedIds() {
-  if (typeof localStorage !== "undefined") {
-    localStorage.setItem(savedStorageKey, JSON.stringify([...savedIds]));
+export function loadSavedGames() {
+  if (savedGamesLoaded) {
+    return Promise.resolve();
   }
+
+  if (!loadPromise) {
+    loadPromise = AsyncStorage.getItem(savedStorageKey)
+      .then((storedIds) => {
+        const parsedGames = storedIds ? (JSON.parse(storedIds) as unknown[]) : [];
+        parsedGames.forEach((game) => {
+          if (
+            typeof game === "object" &&
+            game !== null &&
+            "id" in game &&
+            typeof game.id === "number"
+          ) {
+            savedGames.set(game.id, game as Game);
+          }
+        });
+        savedGamesLoaded = true;
+        notify();
+      })
+      .catch(() => {
+        savedGamesLoaded = true;
+      })
+      .finally(() => {
+        loadPromise = null;
+      });
+  }
+
+  return loadPromise;
 }
 
 function notify() {
@@ -31,22 +54,24 @@ function notify() {
 }
 
 export function isGameSaved(gameId: number) {
-  return savedIds.has(gameId);
+  return savedGames.has(gameId);
 }
 
-export function toggleSavedGame(gameId: number) {
-  if (savedIds.has(gameId)) {
-    savedIds.delete(gameId);
+export async function toggleSavedGame(game: Game) {
+  await loadSavedGames();
+
+  if (savedGames.has(game.id)) {
+    savedGames.delete(game.id);
   } else {
-    savedIds.add(gameId);
+    savedGames.set(game.id, game);
   }
 
-  persistSavedIds();
+  await persistSavedIds();
   notify();
 }
 
-export function getSavedGames(games: Game[]) {
-  return games.filter((game) => savedIds.has(game.id));
+export function getSavedGames() {
+  return [...savedGames.values()];
 }
 
 export function subscribeSavedGames(listener: SavedListener) {

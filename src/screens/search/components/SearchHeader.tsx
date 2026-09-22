@@ -13,7 +13,7 @@ type SearchHeaderProps = {
 
 export default function SearchHeader({ query, onChangeQuery }: SearchHeaderProps) {
   return (
-    <View className="relative h-[250px] w-full overflow-hidden rounded-[32px] bg-[#EC5621]">
+    <View className="relative self-start w-full overflow-hidden rounded-[38px] bg-[#EC5621] px-4 py-10 pt-16">
       <Image
         source={wavesBanner}
         resizeMode="stretch"
@@ -23,7 +23,7 @@ export default function SearchHeader({ query, onChangeQuery }: SearchHeaderProps
       <Image
         source={controlGame}
         resizeMode="contain"
-        className="absolute right-[-5px] top-10 h-[145px] w-[145px]"
+        className="absolute right-[-15px] top-16 h-[145px] w-[145px]"
       />
 
       <View className="absolute left-4 right-4 top-5 z-10">
@@ -36,20 +36,20 @@ export default function SearchHeader({ query, onChangeQuery }: SearchHeaderProps
         </Pressable>
       </View>
 
-      <View className="absolute left-4 right-4 top-[92px] z-10">
-        <Text className="text-3xl leading-[28px] text-[#1A1A1A]">
+      <View className="z-10 gap-10 mb-4">
+        <Text className="text-[37px] leading-[40px] tracking-normal text-[#1A1A1A]">
           {"Descubramos\nUn nuevo\nJuego"}
         </Text>
       </View>
 
-      <View className="absolute bottom-[18px] left-4 right-4 z-10 h-[42px] flex-row items-center rounded-full bg-[#151515] px-3">
-          <SearchIcon size={17} color="#A8A8A8" />
+      <View className="h-[62px] flex flex-row items-center justify-start gap-3 self-stretch rounded-full bg-[#151515] px-6">
+          <SearchIcon size={20} color="#B9B9B9" />
           <TextInput
             value={query}
             onChangeText={onChangeQuery}
             placeholder="Search games, titles, genres..."
             placeholderTextColor="#777777"
-            className="ml-2 flex-1 text-sm text-white"
+            className="text-md text-[#B9B9B9]"
             returnKeyType="search"
           />
       </View>

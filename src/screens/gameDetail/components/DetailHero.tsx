@@ -33,17 +33,18 @@ export default function DetailHero({ game }: DetailHeroProps) {
           <ArrowLeft size={20} color="#FFFFFF" />
         </Pressable>
 
-        <View className="mx-3 h-16 items-center justify-center rounded-full border border-[#3A241D] bg-[#1A110E]/90 px-12 py-2">
+        <View className="mx-3 h-16 max-w-[55%] items-center justify-center rounded-full border border-[#3A241D] bg-[#1A110E]/90 px-12 py-2">
           <Text className="text-sm text-white">DETALLES</Text>
           <Text
             numberOfLines={1}
+            ellipsizeMode="tail"
             className="mt-1 text-[12px] text-[#8E8582]"
           >
             {game.name.toUpperCase()}
           </Text>
         </View>
 
-        <SaveButton gameId={game.id} />
+        <SaveButton game={game} />
       </View>
 
       <LinearGradient
@@ -65,6 +66,7 @@ export default function DetailHero({ game }: DetailHeroProps) {
       <View className="absolute -bottom-12 left-5 right-5">
         <Text
           numberOfLines={2}
+          ellipsizeMode="tail"
           className="text-[32px] leading-[35px] text-white">
           {game.name}
         </Text>

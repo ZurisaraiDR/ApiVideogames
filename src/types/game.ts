@@ -13,7 +13,7 @@ export type GameLanguage = {
 
 export type GameMode = {
   id: string;
-  name: string;
+  slug: string;
 };
 
 export type Game = {

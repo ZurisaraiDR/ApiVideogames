@@ -11,7 +11,7 @@ export default function LanguagesSection({ game }: LanguagesSectionProps) {
   const languages = game.languages ?? [];
 
   return (
-    <View className="mt-6">
+    <View className="mt-6 px-3">
       <View className="flex-row items-center justify-between px-3">
         <Text className="text-[16px] font-semibold text-white">
           Idiomas Disponibles ({languages.length})
@@ -33,7 +33,7 @@ export default function LanguagesSection({ game }: LanguagesSectionProps) {
       >
         {languages.map((language) => (
           <View key={language.name} className="h-[180px] w-[185px] rounded-3xl bg-[#151515] p-4">
-            <Text className="text-[20px] text-white">
+            <Text className="text-[17px] leading-6 text-white">
               {language.flag} {language.name}
             </Text>
             <View className="mt-6 flex-row flex-wrap gap-2">

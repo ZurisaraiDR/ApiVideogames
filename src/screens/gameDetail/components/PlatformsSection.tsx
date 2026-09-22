@@ -1,5 +1,4 @@
-import { Image } from "expo-image";
-import { Text, View } from "react-native";
+import { Text, View, Image } from "react-native";
 
 import { Game } from "@/types/game";
 
@@ -11,16 +10,16 @@ type PlatformsSectionProps = {
 
 export default function PlatformsSection({ game }: PlatformsSectionProps) {
   return (
-    <View className="mt-6 px-3">
+    <View className="mt-6 px-6">
       <View className="flex-row items-center">
-        <View className="mr-4 h-8 w-12">
+        {/* <View className="mr-2 h-8 w-12">
           <Image
             source={controlGameBlack}
-            contentFit="contain"
+            resizeMode="contain"
             className="h-full w-full"
           />
-        </View>
-        <Text className="text-[10px] font-semibold text-white">
+        </View> */}
+        <Text className="text-[14px] font-semibold text-white">
           Plataformas Disponibles:
         </Text>
       </View>
@@ -28,8 +27,8 @@ export default function PlatformsSection({ game }: PlatformsSectionProps) {
       <View className="mt-4 flex-row flex-wrap gap-2">
         {(game.platforms.length ? game.platforms : [{ id: 0, name: "PC", abbreviation: "PC" }]).map(
           (platform) => (
-            <View key={platform.id} className="aspect-square w-[23%] items-center justify-center rounded-2xl bg-[#151515]">
-              <Text className="text-[10px] text-white">{platform.abbreviation}</Text>
+            <View key={platform.id} className="aspect-square w-[23%] h-28 items-center justify-center rounded-2xl bg-[#151515]">
+              <Text className="text-[12px] text-white">{platform.abbreviation}</Text>
             </View>
           )
         )}

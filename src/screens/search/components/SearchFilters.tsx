@@ -23,37 +23,37 @@ const platformWidths: Record<string, string> = {
 const gameModes = [
   {
     id: "single-player",
-    name: "Single-Player",
+    slug: "single-player",
     image: require("../../../../assets/singlePlayer.png"),
     color: "#FFE68A",
   },
   {
     id: "multiplayer",
-    name: "Multiplayer",
+    slug: "multiplayer",
     image: require("../../../../assets/multiplayer.png"),
     color: "#DDD8F5",
   },
   {
     id: "split-screen",
-    name: "Split Screen",
+    slug: "split-screen",
     image: require("../../../../assets/splitScreen.png"),
     color: "#AFE4F5",
   },
   {
     id: "co-operative",
-    name: "Co-Operative",
+    slug: "co-operative",
     image: require("../../../../assets/coOperative.png"),
     color: "#A9EDC1",
   },
   {
     id: "mmo",
-    name: "Massively Multiplayer Online (MMO)",
+    slug: "massively-multiplayer-online-mmo",
     image: require("../../../../assets/mmo.png"),
     color: "#FFA68F",
   },
   {
     id: "battle-royale",
-    name: "Battle Royale",
+    slug: "battle-royale",
     image: require("../../../../assets/battleRoyale.png"),
     color: "#FFE68A",
   },
@@ -130,7 +130,7 @@ export default function SearchFilters({ topRated }: SearchFiltersProps) {
                 className="absolute bottom-0 h-[74%] w-full"
               />
               <Text className="absolute left-3 right-2 top-3 text-[15px] leading-[19px] text-[#171717]">
-                {mode.name}
+                {mode.slug}
               </Text>
             </View>
           ))}

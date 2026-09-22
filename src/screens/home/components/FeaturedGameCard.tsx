@@ -1,7 +1,8 @@
-import { Text, View, Image } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { Gamepad2, Star } from "lucide-react-native";
+import { router } from "expo-router";
 import { FeaturedGame } from "../services/games.service";
 
 type FeaturedGameCardProps = {
@@ -12,7 +13,15 @@ export default function FeaturedGameCard({
   game,
 }: FeaturedGameCardProps) {
   return (
-    <View className="overflow-hidden rounded-3xl">
+    <Pressable
+      onPress={() =>
+        router.push({
+          pathname: "/game/[id]",
+          params: { id: String(game.id) },
+        })
+      }
+      className="overflow-hidden rounded-3xl"
+    >
 
       <View className="relative h-[220px] w-full rounded-t-3xl">
 
@@ -121,6 +130,6 @@ export default function FeaturedGameCard({
         </View>
       </View>
 
-    </View>
+    </Pressable>
   );
 }

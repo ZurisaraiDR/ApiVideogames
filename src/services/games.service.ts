@@ -28,12 +28,12 @@ const languages: GameLanguage[] = [
 ];
 
 const gameModes: GameMode[] = [
-  { id: "single-player", name: "Single-Player" },
-  { id: "multiplayer", name: "Multiplayer" },
-  { id: "split-screen", name: "Split Screen" },
-  { id: "co-operative", name: "Co-Operative" },
-  { id: "mmo", name: "Massively Multiplayer Online (MMO)" },
-  { id: "battle-royale", name: "Battle Royale" },
+  { id: "single-player", slug: "single-player" },
+  { id: "multiplayer", slug: "multiplayer" },
+  { id: "split-screen", slug: "split-screen" },
+  { id: "co-operative", slug: "co-operative" },
+  { id: "mmo", slug: "massively-multiplayer-online-mmo" },
+  { id: "battle-royale", slug: "battle-royale" },
 ];
 
 type GameSeed = Pick<Game, "id" | "name" | "coverUrl" | "platforms"> &

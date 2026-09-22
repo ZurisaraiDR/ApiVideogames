@@ -137,7 +137,7 @@ export default function SearchFilters({ topRated }: SearchFiltersProps) {
         </ScrollView>
       </View>
 
-      <View className="mt-1">
+      {/* <View className="mt-1">
         <View className="mb-3 flex-row items-center justify-between">
           <View className="flex-row items-center">
             <Star size={11} color="#FFB51B" fill="#FFB51B" />
@@ -157,7 +157,7 @@ export default function SearchFilters({ topRated }: SearchFiltersProps) {
             <GameCard key={game.id} game={game} />
           ))}
         </ScrollView>
-      </View>
+      </View> */}
     </View>
   );
 }

@@ -1,7 +1,7 @@
 {
   "expo": {
     "scheme": "your-app-scheme",
-    "name": "my-expo-app",
+    "name": "GameSpace",
     "slug": "my-expo-app",
     "version": "1.0.0",
     "web": {
@@ -24,8 +24,8 @@
       "expo-router"
     ],
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/iconApp.png",
+    "userInterfaceStyle": "dark",
     "assetBundlePatterns": [
       "**/*"
     ],

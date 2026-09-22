@@ -10,6 +10,7 @@ import { Star } from "lucide-react-native";
 import { router } from "expo-router";
 
 import { Game } from "@/types/game";
+import SaveButton from "@/components/SaveButton";
 
 type GameCardProps = {
   game: Game;
@@ -55,6 +56,10 @@ export default function GameCard({
             {game.rating?.toFixed(1) ?? "—"}
           </Text>
 
+        </View>
+
+        <View className="absolute right-2 bottom-2">
+          <SaveButton gameId={game.id} size={15} />
         </View>
       </View>
 

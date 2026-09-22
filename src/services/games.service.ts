@@ -209,10 +209,11 @@ const searchGamesData: Game[] = [
 ];
 
 export async function getGames(): Promise<Game[]> {
-  return Promise.resolve(mockGames);
+  return Promise.resolve([...mockGames, ...searchGamesData]);
 }
 
-export async function getHomeData() {
+export async function getHomeData(signal?: AbortSignal) {
+  void signal;
   const games = await getGames();
 
   return {
@@ -225,18 +226,13 @@ export async function getHomeData() {
 }
 
 export async function getGameById(id: string): Promise<Game | null> {
-  const games = [...(await getGames()), ...searchGamesData];
+  const games = await getGames();
   return games.find((game) => String(game.id) === id) ?? null;
 }
 
 export async function searchGames(query: string): Promise<Game[]> {
   const normalizedQuery = query.trim().toLowerCase();
-
-  if (!normalizedQuery) {
-    return [];
-  }
-
-  const games = [...(await getGames()), ...searchGamesData];
+  const games = await getGames();
 
   return games.filter((game) =>
     [game.name, game.developer, ...(game.genres ?? [])]
@@ -245,3 +241,4 @@ export async function searchGames(query: string): Promise<Game[]> {
       .includes(normalizedQuery)
   );
 }
+

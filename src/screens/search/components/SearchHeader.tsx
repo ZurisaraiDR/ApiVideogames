@@ -45,7 +45,6 @@ export default function SearchHeader({ query, onChangeQuery }: SearchHeaderProps
       <View className="absolute bottom-[18px] left-4 right-4 z-10 h-[42px] flex-row items-center rounded-full bg-[#151515] px-3">
           <SearchIcon size={17} color="#A8A8A8" />
           <TextInput
-            autoFocus
             value={query}
             onChangeText={onChangeQuery}
             placeholder="Search games, titles, genres..."

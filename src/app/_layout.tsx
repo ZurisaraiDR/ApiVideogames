@@ -1,49 +1,26 @@
-import {Stack} from 'expo-router';
+import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import BottomNavigation from '@/components/BottomNavigation';
+import QueryProvider from '@/providers/QueryProvider';
 
 import '../../global.css';
 
 
 export default function RootLayout() {
   return (
-    <SafeAreaProvider>
-      <StatusBar style="auto" />
-      <Stack
-        screenOptions={{
-          contentStyle: { backgroundColor: '#0D0D0D' },
-        }}
-      >
-        {/* Pantalla de inicio */}
-        <Stack.Screen
-        name = "index"
-        options={{
-          headerShown: false,
-        }}
+    <QueryProvider>
+      <SafeAreaProvider>
+        <StatusBar style="auto" />
+        <Stack
+          screenOptions={{
+            contentStyle: { backgroundColor: '#0D0D0D' },
+            headerShown: false,
+          }}
         />
-        {/* Pantalla de busqueda */}
-        <Stack.Screen
-        name = "search"
-        options={{
-          headerShown: false,
-        }}
-        />
-        {/* Pantalla de videojuegos guardados */}
-        <Stack.Screen
-        name = "saved"
-        options={{
-          headerShown: false,
-        }}
-        />
-        {/* Pantalla de detalles del videojuego */}
-        <Stack.Screen
-        name = "game/[id]"
-        options={{
-          headerShown: false,
-        }}
-        />
-      </Stack>
-    </SafeAreaProvider>
+        <BottomNavigation />
+      </SafeAreaProvider>
+    </QueryProvider>
   );
 }

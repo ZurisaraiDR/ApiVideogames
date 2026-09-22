@@ -9,6 +9,7 @@ import {
 import { Pressable, Text, View } from "react-native";
 
 import { Game } from "@/types/game";
+import SaveButton from "@/components/SaveButton";
 
 type DetailHeroProps = {
   game: Game;
@@ -43,12 +44,7 @@ export default function DetailHero({ game }: DetailHeroProps) {
           </Text>
         </View>
 
-        <Pressable
-          accessibilityLabel="Guardar juego"
-          className="h-10 w-10 items-center justify-center rounded-full bg-[#1D1D1D]/80"
-        >
-          <Bookmark size={18} color="#FFFFFF" />
-        </Pressable>
+        <SaveButton gameId={game.id} />
       </View>
 
       <View className="absolute bottom-0 left-0 right-0 h-[310px] bg-gradient-to-t from-[#0D0D0D] via-[#0D0D0D]/80 to-transparent" />

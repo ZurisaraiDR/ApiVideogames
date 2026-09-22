@@ -32,7 +32,7 @@ export default function GameCard({
   return (
     <Pressable
       onPress={handlePress}
-      className="mr-3 w-[125px]"
+      className="mr-4 w-[150px]"
     >
       <View className="relative">
         
@@ -41,7 +41,7 @@ export default function GameCard({
             uri: game.coverUrl,
           }}
           resizeMode="cover"
-          className="h-[170px] w-[125px] rounded-[10px]"
+          className="h-[200px] w-[150px] rounded-[2px]"
         />
 
         <View className="absolute right-2 top-2 flex-row items-center rounded-full bg-[#1D201F]/90 px-2 py-1">
@@ -58,16 +58,16 @@ export default function GameCard({
 
         </View>
 
-        <View className="absolute right-2 bottom-2">
+        {/* <View className="absolute right-2 bottom-2">
           <SaveButton gameId={game.id} size={15} />
-        </View>
+        </View> */}
       </View>
 
       <Text
         numberOfLines={1}
-        className="mt-2 text-lg font-semibold text-white"
+        className="mt-2 text-sm font-medium text-white"
       >
-        {game.name}
+        {game.name} 
       </Text>
 
       <Text

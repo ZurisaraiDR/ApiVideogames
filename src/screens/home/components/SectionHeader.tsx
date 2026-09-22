@@ -16,9 +16,9 @@ export default function SectionHeader({
   onPress,
 }: SectionHeaderProps) {
   return (
-    <View className="mb-3 flex-row items-center justify-between">
+    <View className="mb-6 flex-row items-center justify-between">
       
-      <Text className="text-xl text-white">
+      <Text className="text-md text-white">
         {title}
       </Text>
 

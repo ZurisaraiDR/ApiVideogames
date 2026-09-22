@@ -9,7 +9,7 @@ const controlGame = require('../../../../assets/controlGame.png');
 
 export default function HomeHeader() {
   return (
-    <View className="relative h-[250px] w-full overflow-hidden rounded-[32px] bg-[#EC5621]">
+    <View className="relative self-start w-full overflow-hidden rounded-[38px] bg-[#EC5621] px-4 py-10 pt-16">
       <Image
         source={wavesBanner}
         resizeMode="stretch"
@@ -19,20 +19,20 @@ export default function HomeHeader() {
       <Image
         source={controlGame}
         resizeMode="contain"
-        className="absolute right-[-5px] top-10 h-[145px] w-[145px]"
+        className="absolute right-[-15px] top-16 h-[145px] w-[145px]"
       />
 
-      <View className="z-10 mt-10 flex flex-col px-4 pt-5">
-        <Text className="text-3xl leading-[28px] text-[#1A1A1A]">
-          {'Descubramos\nUn nuevo\nJuego'}
+      <View className="z-10 gap-6">
+        <Text className="text-[37px] leading-[40px] tracking-normal text-[#1A1A1A]">
+          {'Descubramos\nUn Nuevo\nJuego'}
         </Text>
 
         <Pressable
           onPress={() => router.push('/search')}
-          className="mt-8 h-[42px] w-full flex flex-row items-center justify-start rounded-full bg-[#151515] px-3 gap-3">
+          className="h-[62px] flex flex-row items-center justify-start gap-3 self-stretch rounded-full bg-[#151515] px-6">
           <Search size={20} color="#B9B9B9" strokeWidth={2} />
 
-          <Text className="text-xl text-[#B9B9B9]">Search games, titles, genres...</Text>
+          <Text className="text-md text-[#B9B9B9]">Search games, titles, genres...</Text>
         </Pressable>
       </View>
     </View>

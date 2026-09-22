@@ -66,7 +66,7 @@ const mockGames: Game[] = [
     coverUrl:
       "https://images.igdb.com/igdb/image/upload/t_cover_big/co1wyy.jpg",
     bannerUrl:
-      "https://images.igdb.com/igdb/image/upload/t_1080p/co1wyy.jpg",
+      "https://images.igdb.com/igdb/image/upload/t_screenshot_med/sc5wvh.jpg",
     summary:
       "The Witcher 3: Wild Hunt – Game of the Year Edition is a complete version of the game released in August 2016 for PC, PlayStation 4, and Xbox One.",
     rating: 9.8,

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { getHomeData, searchGames } from "@/services/games.service";
+import { getHomeData } from "@/services/games.service";
+import { useIgdbGames } from "@/hooks/useIgdbGames";
 import { Game } from "@/types/game";
 
 import SearchFilters from "./components/SearchFilters";
@@ -14,21 +15,16 @@ export default function SearchScreen() {
     const [results, setResults] = useState<Game[]>([]);
     const [topRated, setTopRated] = useState<Game[]>([]);
     const [loading, setLoading] = useState(false);
+    const igdbQuery = useIgdbGames(query);
 
     useEffect(() => {
         getHomeData().then((homeData) => setTopRated(homeData.topRated));
     }, []);
 
     useEffect(() => {
-        const timeout = setTimeout(async () => {
-            setLoading(Boolean(query.trim()));
-            const nextResults = await searchGames(query);
-            setResults(nextResults);
-            setLoading(false);
-        }, 180);
-
-        return () => clearTimeout(timeout);
-    }, [query]);
+        setLoading(igdbQuery.isLoading || igdbQuery.isFetching);
+        setResults(igdbQuery.data ?? []);
+    }, [igdbQuery.data, igdbQuery.isFetching, igdbQuery.isLoading]);
 
     return (
         <SafeAreaView edges={["top"]} className="flex-1 bg-[#0D0D0D]">

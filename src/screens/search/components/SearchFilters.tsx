@@ -13,6 +13,13 @@ const filters = {
 
 const platforms = ["PC", "PS5", "Xbox", "Nintendo"];
 
+const platformWidths: Record<string, string> = {
+  PC: "w-20",
+  PS5: "w-20",
+  Xbox: "w-20",
+  Nintendo: "w-[92px]",
+};
+
 const gameModes = [
   {
     id: "single-player",
@@ -60,9 +67,7 @@ export default function SearchFilters({ topRated }: SearchFiltersProps) {
   return (
     <View className="gap-5 px-3 pb-5 pt-5">
       <View>
-        <Text className="text-xl font-medium text-white">
-          Por Plataforma
-        </Text>
+        <Text className="text-xl font-medium text-white">Por Plataforma</Text>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -72,9 +77,16 @@ export default function SearchFilters({ topRated }: SearchFiltersProps) {
           {platforms.map((platform) => (
             <View
               key={platform}
-              className="h-20 w-20 items-center justify-center rounded-2xl bg-[#151515]"
+              className={`h-20 min-w-20 items-center justify-center rounded-2xl bg-[#151515] ${platformWidths[platform]}`}
             >
-              <Text className="text-xl text-white">{platform}</Text>
+              <Text
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                minimumFontScale={0.8}
+                className="px-2 text-center text-xl text-white"
+              >
+                {platform}
+              </Text>
             </View>
           ))}
         </ScrollView>

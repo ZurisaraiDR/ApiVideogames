@@ -1,7 +1,6 @@
-import { Image } from "expo-image";
 import { router } from "expo-router";
 import { CalendarDays, Star } from "lucide-react-native";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, View, Image } from "react-native";
 
 import { Game } from "@/types/game";
 import SaveButton from "@/components/SaveButton";
@@ -21,7 +20,7 @@ export default function SearchResultCard({ game }: SearchResultCardProps) {
       <View className="relative">
         <Image
           source={{ uri: game.coverUrl }}
-          contentFit="cover"
+          resizeMode="cover"
           className="h-[150px] w-[112px] rounded-xl"
         />
         <View className="absolute right-1 top-1">

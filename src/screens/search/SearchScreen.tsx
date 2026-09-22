@@ -12,19 +12,12 @@ import SearchResultCard from "./components/SearchResultCard";
 
 export default function SearchScreen() {
     const [query, setQuery] = useState("");
-    const [results, setResults] = useState<Game[]>([]);
     const [topRated, setTopRated] = useState<Game[]>([]);
-    const [loading, setLoading] = useState(false);
-    const igdbQuery = useIgdbGames(query);
+    const { data: results = [], isLoading, isFetching } = useIgdbGames(query);
 
     useEffect(() => {
         getHomeData().then((homeData) => setTopRated(homeData.topRated));
     }, []);
-
-    useEffect(() => {
-        setLoading(igdbQuery.isLoading || igdbQuery.isFetching);
-        setResults(igdbQuery.data ?? []);
-    }, [igdbQuery.data, igdbQuery.isFetching, igdbQuery.isLoading]);
 
     return (
         <SafeAreaView edges={["top"]} className="flex-1 bg-[#0D0D0D]">
@@ -34,12 +27,12 @@ export default function SearchScreen() {
                 {!query.trim() ? (
                     <SearchFilters topRated={topRated} />
                 ) : (
-                    <View className="pb-6 pt-5">
+                    <View className="pb-6 pt-5 px-6">
                         <Text className="px-3 text-[10px] text-white">
                             Resultados Más populares para “{query}”
                         </Text>
 
-                        {loading ? (
+                        {isLoading || isFetching ? (
                             <ActivityIndicator className="mt-8" color="#F15A35" />
                         ) : results.length ? (
                             results.map((game) => <SearchResultCard key={game.id} game={game} />)

@@ -10,20 +10,12 @@ import GameCard from './components/GameCard';
 import SectionHeader from './components/SectionHeader';
 
 import { useCategoryGames, useGames } from './hooks/useGames';
-
-const categories = [
-  { label: 'Todos' },
-  { label: 'Shooter', id: 5 },
-  { label: 'Puzzle', id: 9 },
-  { label: 'RPG', id: 12 },
-  { label: 'Simulador', id: 13 },
-  { label: 'Estrategia', id: 15 },
-  { label: 'Aventura', id: 31 },
-];
+import { useGenres } from '@/hooks/useGenres';
 
 export default function HomeScreen() {
   const [selectedGenreId, setSelectedGenreId] = useState<number | undefined>();
   const { data: gamesData, isLoading: gamesLoading, isRefetching, error, refetch } = useGames();
+  const { data: genres = [] } = useGenres();
   const {
     data: categoryGames,
     isLoading: categoryLoading,
@@ -76,12 +68,17 @@ export default function HomeScreen() {
                 gap: 8,
                 flexGrow: 1,
               }}>
-              {categories.map((category) => (
+              <CategoryChip
+                label="Todos"
+                selected={selectedGenreId === undefined}
+                onPress={() => setSelectedGenreId(undefined)}
+              />
+              {genres.map((genre) => (
                 <CategoryChip
-                  key={category.label}
-                  label={category.label}
-                  selected={selectedGenreId === category.id}
-                  onPress={() => setSelectedGenreId(category.id)}
+                  key={genre.id}
+                  label={genre.name}
+                  selected={selectedGenreId === genre.id}
+                  onPress={() => setSelectedGenreId(genre.id)}
                 />
               ))}
             </ScrollView>
@@ -113,7 +110,11 @@ export default function HomeScreen() {
                   <SectionHeader title="Más populares" />
                 </View>
 
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingLeft: 12 }}>
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={{ paddingLeft: 12, gap: 16 }}
+                >
                   {gamesData.popular.map((game, index) => (
                     <GameCard key={game.id + index} game={game} />
                   ))}
@@ -127,7 +128,11 @@ export default function HomeScreen() {
                   <SectionHeader title="Recién Añadidos" />
                 </View>
 
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingLeft: 12 }}>
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={{ paddingLeft: 12, gap: 16 }}
+                >
                   {gamesData.recentlyAdded.map((game, index) => (
                     <GameCard key={game.id + index} game={game} />
                   ))}
@@ -141,7 +146,11 @@ export default function HomeScreen() {
                   <SectionHeader title="Proximamente" />
                 </View>
 
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingLeft: 12 }}>
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={{ paddingLeft: 12, gap: 16 }}
+                >
                   {gamesData.upcoming.map((game, index) => (
                     <GameCard key={game.id + index} game={game} />
                   ))}
@@ -152,7 +161,7 @@ export default function HomeScreen() {
             <View className="mt-6">
               <View className="px-3">
                 <SectionHeader
-                  title={categories.find((category) => category.id === selectedGenreId)?.label ?? 'Catálogo'}
+                  title={genres.find((genre) => genre.id === selectedGenreId)?.name ?? 'Catálogo'}
                 />
               </View>
 

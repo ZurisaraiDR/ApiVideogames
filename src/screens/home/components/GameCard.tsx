@@ -33,6 +33,7 @@ export default function GameCard({
     <Pressable
       onPress={handlePress}
       className={className}
+      style={className ? undefined : { width: 150, flexShrink: 0 }}
     >
       <View className="relative">
         <Image
@@ -60,6 +61,7 @@ export default function GameCard({
 
       <Text
         numberOfLines={1}
+        ellipsizeMode="tail"
         className="mt-2 text-sm font-medium text-white"
       >
         {game.name}
@@ -67,6 +69,7 @@ export default function GameCard({
 
       <Text
         numberOfLines={1}
+        ellipsizeMode="tail"
         className="mt-1 text-sm text-[#777777]"
       >
         {game.developer ?? "Desconocida"}
